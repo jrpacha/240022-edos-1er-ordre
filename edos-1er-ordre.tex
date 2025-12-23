@@ -1,0 +1,477 @@
+% Handouts
+%
+% Tema 3. Sistemes Lineals. Mètodes Iteratius
+%
+
+\documentclass[slidetop,compress,10pt]{beamer}
+
+\mode<presentation>{\usetheme{SimplePlus}}
+\setbeamertemplate{theorems}[numbered]
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{itemize item}[triangle]
+\setbeamertemplate{itemize subitem}[circle]
+\setbeamertemplate{frametitle continuation}{%
+\usebeamerfont{frametitle}
+(\insertcontinuationcountroman)
+}
+
+%\apptocmd{\frame}{}{\justifying}{} % Allow optional arguments after frame.
+
+\usepackage{mathptmx}
+\usepackage[scaled=0.9]{helvet}
+\usepackage{courier}
+
+\usepackage{ragged2e}
+\usepackage{amsmath,amssymb}
+\usepackage{amsfonts}
+\usepackage{mathtools}
+\usepackage{wrapfig}
+\usepackage{cancel}
+\usepackage{fontawesome}
+\usepackage{caption}
+\usepackage{color}
+
+\usepackage[utf8]{inputenc}
+\usepackage[catalan]{babel}
+\selectlanguage{catalan}
+\uselanguage{Catalan}
+\languagepath{Catalan}
+
+\usepackage{enumitem}
+
+\usepackage{ifpdf}
+\usepackage{numprint}
+\usepackage{oldstyle}
+\graphicspath{ {_figures/} }
+\DeclareGraphicsExtensions{.png}
+\usepackage{subfigure}
+
+\usepackage{yhmath}
+
+\usepackage[round]{natbib}
+
+\hypersetup{
+  pdfauthor   = {J.R. Pacha},
+  pdftitle    = {Calcul2}
+  pdfsubject  = {EDOs},
+  pdfpagemode = {FullScreen},
+  pdfstartview = {},
+  colorlinks  = {true},
+%  bookmarks   = {true},
+%  pagebackref = {true},
+  bookmarksnumbered = {true},
+  hyperindex  = {true}
+}
+% \pdfadjustspacing=1
+
+\usepackage{url}
+%\setcounter{section}{3}
+
+% THEOREMS -------------------------------------------------------
+\newtheorem{thm}{Teorema}%[section]
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{lem}[thm]{Lemma}
+\theoremstyle{definition}
+\newtheorem{prop}{Proposici{\'{o}}}%[thm]{Proposició}
+\newtheorem{defn}{Definici{\'{o}}}%[thm]{Definici\'{o}}
+\theoremstyle{remark}
+%\newtheorem{rem}[thm]{Remarca}
+\newtheorem{rem}{Remarca}
+%\newtheorem{ex}[thm]{Exemple}
+\newtheorem{ex}{Exemple}
+%\numberwithin{equation}{section}
+\newtheorem{exc}{Exercici}
+\newtheorem{demo}{Demostraci{\'{o}}}
+\newtheorem*{demo*}{Demostraci{\'{o}}}
+
+% Algorismes -----------------------------------------------------
+\usepackage[noline,plain]{algorithm2e}
+
+\setlength{\AlCapSkip}{0.7em}
+
+\usepackage{hyperref}
+
+% MATH -----------------------------------------------------------
+\newcommand{\norm}[1]{\left\Vert#1\right\Vert}
+\newcommand{\abs}[1]{\left\vert#1\right\vert}
+\newcommand{\set}[1]{\left\{#1\right\}}
+\newcommand{\bs}[1]{\ensuremath{\boldsymbol{#1}}}
+\newcommand{\C}{\ensuremath{\mathbb{C}}}
+\newcommand{\R}{\ensuremath{\mathbb{R}}}
+\newcommand{\N}{\ensuremath{\mathbb{N}}}
+\newcommand{\M}{\ensuremath{\mathbb{M}}}
+\newcommand{\Z}{\ensuremath{\mathbb{Z}}}
+\newcommand{\K}{\ensuremath{\mathbb{K}}}
+\newcommand{\eps}{\ensuremath{\epsilon}}
+\newcommand{\veps}{\ensuremath{\varepsilon}}
+\newcommand{\To}{\longrightarrow}
+\newcommand{\BX}{\mathbf{B}(X)}
+\newcommand{\A}{\mathcal{A}}
+\newcommand{\Or}{\mathcal{O}}
+\newcommand{\Id}[1]{Id_{#1}}
+\newcommand{\argcosh}{\ensuremath{\mathrm{argcosh}}\,}
+\newcommand{\argsinh}{\ensuremath{\mathrm{argsinh}}\,}
+\newcommand{\argtanh}{\ensuremath{\mathrm{argtanh}}\,}
+\newcommand{\argcoth}{\ensuremath{\mathrm{argcoth}}\,}
+\newcommand{\rme}{\mathrm{e}}
+\newcommand{\rmi}{\mathrm{i}}
+\newcommand{\rmd}{\mathrm{d}}
+\newcommand{\re}{\mathrm{Re\:}}
+\newcommand{\im}{\mathrm{Im\:}}
+\newcommand{\wt}[1]{\ensuremath{\widetilde{#1}}}
+\DeclareMathOperator{\Hessian}{Hess}
+\DeclareMathOperator*{\maxc}{\text{\rm m\`{a}x}}
+\DeclareMathOperator*{\limc}{\text{\rm l\'{\i}m}}
+\DeclareMathOperator*{\minc}{\text{\rm m\'{\i}n}}
+\newcommand{\interior}[1]{\ensuremath{\mathring{#1}}}
+\DeclareMathOperator{\ext}{Ext}
+\DeclareMathOperator{\fr}{Fr}
+\DeclareMathOperator{\Dom}{\mathcal{D}}
+\newcommand{\dom}[1]{\Dom\left(#1\right)}
+\DeclareMathOperator{\Rang}{\mathcal{R}}
+\newcommand{\rang}[1]{\Rang\left(#1\right)}
+\newcommand{\Mat}[2]{\ensuremath M_{#1}(#2)}
+\newcommand{\bracket}[2]{\ensuremath\left\langle #1, #2\right\rangle}
+\newcommand{\verteq}{\rotatebox{90}{$\scriptstyle \,=$}}
+\newcommand{\eqover}[1]{\substack{\verteq \\ \scriptstyle #1}}
+\newcommand{\equnder}[1]{\substack{\scriptstyle #1 \\ \verteq}}
+
+% ----------------------------------------------------------------
+\newcommand{\gl}{\guillemotleft}
+\newcommand{\gr}{\guillemotright}
+\newcommand{\sst}{\ensuremath{\scriptstyle}}
+\newcommand{\npos}[2]{\ensuremath{\oldstyle{\numprint[#1]{#2}}}}
+\renewcommand{\thefootnote}{\fnsymbol{footnote}} %{$\scriptstyle (*)$}
+
+% Counters -------------------------------------------------------
+\newcounter{saveenum}
+\beamersetuncovermixins{\opaqueness<1>{25}}{\opaqueness<2->{15}}
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{enumerate item}{\arabic{enumi})}%
+\setbeamertemplate{enumerate label}{\roman{enumi})}
+\setbeamerfont{caption}{size=\scriptsize}
+
+\newdimen\oldparindent
+\oldparindent=\parindent  %Keep the original parindent
+
+\AtBeginSection[]{
+  \begin{frame}
+    \vfill
+    \centering
+    \begin{beamercolorbox}[sep=8pt, center, shadow=true,
+      rounded=true]{title}
+      \usebeamerfont{title}\insertsectionhead\par%
+    \end{beamercolorbox}
+    \vfill
+  \end{frame}
+}
+
+%\title[]%
+%{{\Large Càlcul II (240022)} \\
+%\large Tema 4. Equacions Diferencials de $1^{\text{er}}$ ordre}
+%
+%\date{\today}
+
+\title{Càlcul II (240022)\\
+Tema 4. Equacions Diferencials Ordinàries (EDOs) de primer ordre}
+\author{}
+\institute{}
+%\insertshortdate
+
+%%----------------------------------------------------------------------------
+\begin{document}
+%\frame{\titlepage}
+%\frame{\tableofcontents}
+
+\begin{frame}
+  \maketitle
+\end{frame}
+
+%%----------------------------------------------------------------------------
+\section{EDOs Lineals}
+\begin{frame}[t,allowframebreaks]%{EDOs de 1er Ordre}%
+\justifying
+%\citep[In][chap.~11]{Reddy2006}
+\begin{defn}\justifying
+Siguin $I\subseteq\R$ un interval de $\R$ i $a, b: I\longrightarrow\R$
+funcions contínues definides en $I$ interval de $\R$. L'equació
+\begin{equation}
+  y' + a(x) y = b(x)
+  \label{eq:edo-lineal-1er-ordre}
+\end{equation}
+és una equació diferencial ordinària (EDO) de $1^{\text{er}}$ ordre on $a$
+és el coeficient i $b$ el terme independent.
+\end{defn}
+
+\begin{defn}\justifying
+  Direm que una funció $\phi: I\longrightarrow\R$, $\phi\in
+  \mathcal{C}^{1}(I)$, és una solució (o una solució \emph{particular}) de
+  l'EDO~\eqref{eq:edo-lineal-1er-ordre}, si
+  \begin{displaymath}
+    \phi'(x) + a(x)\phi(x) = b(x)
+  \end{displaymath}
+  per a cada $x\in I$.
+\end{defn}
+
+\begin{example}\label{ex:edo-lineal-1er-ordre}\justifying
+  La funció $y(x) = x^{2} / 3$ és una solució particular, definida a
+  l'interval $I = (0, +\infty)$, de l'EDO lineal de
+  $1^{\text{er}}$ ordre,
+  \begin{equation}
+    y' + y / x = x.
+    \label{eq:edo-lineal-1er-ordre-1}
+  \end{equation}
+\end{example}
+\end{frame}
+
+\begin{frame}[t]\justifying
+  \begin{defn}\justifying
+    Direm que una família de funcions uniparamètrica
+    \begin{displaymath}
+      \mathcal{F} = \left\{
+        y(\cdot, C): I\longrightarrow\R, C\in\mathcal{A}\subseteq\R
+      \right\},
+    \end{displaymath}
+    $Y(\cdot, C)\in \mathcal{C}^{1}(I)$ per a cada $C\in\mathcal{A}$,
+    és la \textbf{solució general} de l'EDO~\eqref{eq:edo-lineal-1er-ordre}
+    si, per a tota solució $\phi_{\ast}$ de~\eqref{eq:edo-lineal-1er-ordre},
+      existeix $C_{\ast}\in\mathcal{A}$ tal que $\phi_{\ast} = Y(\cdot,
+      C_{\ast})$.
+  \end{defn}
+
+  \begin{example}\justifying
+    La família de funcions
+    \begin{displaymath}
+      \arraycolsep = 1.1pt
+      \begin{array}{rcl}
+        Y(\cdot,C) : I = (0,+\infty) & \longrightarrow & \R\\
+        x\in I & \longrightarrow & y(x,C) = \dfrac{C}{x} + \dfrac{x^{2}}{3},
+      \end{array}
+    \end{displaymath}
+    $C\in\R$, és la solució general de
+    l'EDO~\eqref{eq:edo-lineal-1er-ordre-1}.
+  \end{example}
+  \begin{rem}
+    Notem que la solució de l'EDO~\eqref{eq:edo-lineal-1er-ordre-1} donada a
+    l'exemple~\ref{ex:edo-lineal-1er-ordre} correspon al valor $C = 0$ del
+    paràmetre.
+  \end{rem}
+\end{frame}
+
+\begin{frame}[t]
+  \begin{prop}[Existència i unicitat de solució]\justifying
+Donat el problema de valors inicials (PVI o de Cauchy) definit per l'EDO
+lineal de $1^{\text{er}}$ ordre~\eqref{eq:edo-lineal-1er-ordre} i la
+condició inicial $y(x_{0}) = y_{0}$, i.e.,
+ \begin{equation}
+   \left.
+ \begin{aligned}
+   y' + a(x) y &= b(x)\\
+   y(x_{0}) &= y_{0}
+ \end{aligned}
+   \right\}\label{eq:pvi-lineal}
+\end{equation}
+amb $x_{0}\in\mathring{\!\! I}$, $y_{0}\in\R$ fixats, existeix una
+\textbf{única} funció $\varphi: I\longrightarrow\R$ tal que:
+\begin{enumerate}[label = (\roman*), ref = (\roman*)]
+  \item $\varphi\in C^{1}(I)$,
+  \item $\varphi'(x) + a(x)\varphi(x) = b(x)$ per a tot $x\in I$,
+  \item $\varphi(x_{0}) = y_{0}$.
+\end{enumerate}
+Direm que $\varphi(x)$ és la solució del PVI~\eqref{eq:pvi-lineal}.
+\end{prop}
+
+\begin{defn}\justifying
+  L'EDO lineal de $1^{\text{er}}$ ordre,
+  \begin{equation}
+    y' + a(x) y = 0,
+    \label{eq:edo-lineal-homogenia-associada}
+  \end{equation}
+  s'anomena \emph{EDO linal homogènia associada a l'EDO lineal de
+  $1^{\text{er}}$ ordre}~\eqref{eq:edo-lineal-1er-ordre}.
+\end{defn}
+\end{frame}
+
+%%----------------------------------------------------------------------------
+\begin{frame}[t]\justifying
+\begin{rem}
+  Notem que l'EDO homogènia~\eqref{eq:edo-lineal-homogenia-associada}
+  s'obté com un cas particular de l'EDO lineal de primer
+  ordre~\eqref{eq:edo-lineal-1er-ordre} agafant $b\equiv 0$.
+\end{rem}
+
+\begin{prop}
+  La solució general de l'EDO lineal homogènia de $1^{\text{er}}$
+  ordre~\eqref{eq:edo-lineal-homogenia-associada} ve donada per la família
+  de funcions
+  \begin{equation}
+    y_{h}(x,C) = C\mathrm{e}^{A(x)},
+    \label{eq:sol-edo-homogenia}
+  \end{equation}
+  $C\in\R$, on
+  \begin{displaymath}
+    \arraycolsep = 1.1pt
+    \begin{array}{rrcl}
+      & A: I & \longrightarrow & \R\\
+        & x & \longrightarrow & A(x) =\displaystyle -\int a(x)\mathrm{d}x
+    \end{array}
+  \end{displaymath}
+  és una primitiva \emph{qualsevol} de la funció $-a(x)$. Per tant
+  \begin{displaymath}
+    A'(x) = \frac{\mathrm{d}}{\mathrm{d} x}\left(-\int a(x)\mathrm{d}
+      x\right) = -a(x)
+  \end{displaymath}
+  per a cada $x\in I$. Sovint~\eqref{eq:sol-edo-homogenia} s'escriu com
+  \begin{equation}
+    y_{h}(x, C) = C\exp\left(-\displaystyle\int a(x)\mathrm{d} x\right).
+    \label{eq:sol-edo-homogenia-int}
+  \end{equation}
+\end{prop}
+
+\end{frame}
+
+%%----------------------------------------------------------------------------
+\begin{frame}\justifying
+  % Put here the content of the slide
+  \begin{prop}\justifying
+     La solució general de l'EDO lineal de $1^{er}$
+     ordre~\eqref{eq:edo-lineal-1er-ordre} ve donada per la suma
+     \begin{equation}
+       y(x,C) = y_{h}(x,C) + y_{p} (x),\quad C\in\R,
+       \label{eq:sol-edo-lineal-1er-ordre}
+     \end{equation}
+     de
+     \begin{enumerate}[label = (\alph*), ref = (\alph*)]
+       \item  $y_{h}(x,C)$, la solució
+         general, \eqref{eq:sol-edo-homogenia}
+         ó~\eqref{eq:sol-edo-homogenia-int}, de l'EDO lineal
+         homogènia~\eqref{eq:edo-lineal-homogenia-associada}, associada
+         a l'EDO lineal~\eqref{eq:edo-lineal-1er-ordre}, i
+       \item $y_{p}(x)$, \emph{una} solució particular qualsevol de
+         l'EDO~\eqref{eq:edo-lineal-1er-ordre}
+     \end{enumerate}
+  \end{prop}
+
+  \begin{rem}\justifying
+    De fet, 
+    \begin{enumerate}[label=(\roman*), ref=(\roman*)]
+      \item Fins ara només tenim fórmules explícites,
+        \eqref{eq:sol-edo-homogenia} ó~\eqref{eq:sol-edo-homogenia-int} que
+        ens donen la solució general, $y_{h}(x, C)$, de l'EDO lineal
+        homogènia~\eqref{eq:edo-lineal-homogenia-associada} associada l'EDO
+        lineal~\eqref{eq:edo-lineal-1er-ordre}.
+      \item Per trobar una solució particular, $y_{p}(x)$, de
+        l'EDO~\eqref{eq:edo-lineal-1er-ordre} i completar així la
+        suma~\eqref{eq:sol-edo-lineal-1er-ordre} es pot fer servir el
+        \emph{mètode de variació dels paràmetres} (o~\emph{mètode de
+          variació de les constants}).
+    \end{enumerate}
+  \end{rem}
+\end{frame}
+
+
+%%----------------------------------------------------------------------------
+\begin{frame}[t]{}\justifying
+  % Put here the content of the  slide
+  \begin{block}{Mètode de  variació dels paràmetres (Lagrange)}\justifying
+    (O mètode de variació de les constants). Ens dóna un ``procediment'' per
+    construir solucions particulars de l'EDO lineal de $1^{\text{er}}$
+    ordre~\eqref{eq:edo-lineal-1er-ordre}, el qual consisteix en buscar
+    solucions de la forma,
+    \begin{equation}
+      y_{p}(x) = h(x)\mathrm{e}^{A(x)},
+      \label{eq:yp-vc}
+    \end{equation}
+    on $h(x)$ és una funció que fixarem substituint~\eqref{eq:yp-vc}
+    a~\eqref{eq:edo-lineal-1er-ordre}:
+    \begin{multline*}
+      y'_{p}(x) + a(x) y_{p}(x) = h'(x)\mathrm{e}^{A(x)} + 
+      A'(x)h(x)\mathrm{e}^{A(x)} + a(x) h(x)\mathrm{e}^{A(x)}\\
+      = h'(x)\mathrm{e}^{h(x)} - \cancel{a(x) h(x)\mathrm{e}^{A(x)}}
+      + \cancel{a(x) h(x)\mathrm{e}^{A(x)}} = h'(x)\mathrm{e}^{A(x)} =
+      b(x)\\
+      \Longleftrightarrow h'(x) = b(x)\mathrm{e}^{-A(x)}
+      \Longleftrightarrow h(x) = \int  b(x)\mathrm{e}^{-A(x)}\mathrm{d} x;
+    \end{multline*}
+    i.e.~\eqref{eq:yp-vc} és solució de~\eqref{eq:edo-lineal-1er-ordre}
+    sii $h(x)$ és una primitiva de la funció
+    $b(x)\mathrm{e}^{A(x)}$. Aleshores,
+    \begin{displaymath}
+      y_{p}(x) = \mathrm{e}^{A(x)} \int  b(x)\mathrm{e}^{-A(x)}\mathrm{d} x
+    \end{displaymath}
+    i, aplicant~\eqref{eq:sol-edo-lineal-1er-ordre} 
+    %s'arriba a la fórmula explícita següent per a la solució general
+    %de~\eqref{eq:edo-lineal-1er-ordre}:
+    \begin{displaymath}
+      y(x,C) = y_{h}(x, C) + y_{p}(x) = C\mathrm{e}^{A(x)} +
+      \mathrm{e}^{A(x)} \int  b(x)\mathrm{e}^{-A(x)}\mathrm{d} x,\quad
+      C\in\R.
+    \end{displaymath} 
+  \end{block}
+
+\end{frame}
+
+%%----------------------------------------------------------------------------
+\section{Exemple (problema 2 de la col·lecció)}
+
+\begin{frame}[t]\justifying
+  % Put here the content of the 3rd slide
+\end{frame}
+
+%%-----------------------------------------------------------------------------
+\begin{frame}[t]\justifying
+  % Put here the content of the 4th slide
+
+\end{frame}
+
+%%-----------------------------------------------------------------------------
+\begin{frame}[t]{Example: an algorithm with caption}
+%% This is needed if you want to add comments in
+%% your algorithm with \Comment
+\DontPrintSemicolon
+
+\SetKwComment{Comment}{\# }{}
+\LinesNumbered
+\centering
+\scalebox{.8}{%
+\begin{algorithm}[H]
+  \captionof{algocf}{An algorithm with caption}\label{alg:two}
+\KwData{$n \geq 0$}
+\KwResult{$y = x^n$}
+$y \gets 1$\;
+$X \gets x$\;
+$N \gets n$\;
+\While{$N \neq 0$}{
+  \eIf{$N$ is even}{
+    $X \gets X \times X$\;
+    $N \gets \frac{N}{2} $ \Comment*[r]{This is a comment}
+  }{\If{$N$ is odd}{
+      $y \gets y \times X$\;
+      $N \gets N - 1$\;
+    }
+  }
+}
+\end{algorithm}
+}
+\end{frame}
+
+%%----------------------------------------------------------------------------
+\begin{frame}[allowframebreaks,t]%\justifying
+
+  \frametitle{References}
+%\bibliographystyle{alpha}
+
+\bibliographystyle{plainnat}
+
+\bibliography{biblio.bib}
+
+%\nocite{*}
+
+\end{frame}
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
